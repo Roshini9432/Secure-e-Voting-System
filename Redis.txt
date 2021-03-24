@@ -1,0 +1,3 @@
+setex key seconds value
+
+setTimeout(function() { alert("my message"); }, time);

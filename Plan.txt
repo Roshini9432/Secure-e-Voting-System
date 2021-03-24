@@ -1,0 +1,18 @@
+Home page:
+Election Commission
+Voter- Sujay Bharath
+---------------------------------------------------------
+Voter :
+Login page and session - Roshini
+Voting page - Sutharsan and Kamalesh
+View Results - Roahith
+---------------------------------------------------------
+Election commission:
+Publish results - Kamalesh
+---------------------------------------------------------
+***Database***
+-------------------
+parties
+voter_list
+voted
+--------------

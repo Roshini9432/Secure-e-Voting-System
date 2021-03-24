@@ -1,0 +1,59 @@
+
+  .btn
+  {
+    background-color: peru;
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    width:20%;
+    padding: 15px;
+    border-radius: 5px;
+    border:2px solid black;
+    margin-left: 80%;
+    text-decoration: none;
+    text-align:center;
+  }
+  .btn-back
+  {
+    background-color: peru;
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    width:5%;
+    padding: 15px;
+    border-radius: 5px;
+    border:2px solid black;
+    margin-left: 0%;
+    text-decoration: none;
+    text-align:center;
+  }
+  .btn:hover
+  {
+    background-color: black;
+    color:white;
+    font-weight: bold;
+    cursor : pointer;
+  }
+  .btn-disabled
+    {
+      background-color: grey;
+      text-decoration: none;
+      font-size: 15px;
+      color: black;
+      font-weight: bold;
+      width:30%;
+      padding: 15px;
+      border-radius: 5px;
+      border:2px solid black;
+      text-align:center;  
+      cursor: no-drop;
+      pointer-events: none;
+      margin: auto;
+    }
+    
+  h1{
+      text-shadow: 2px 2px 5px white;
+  }
+ 
+  
+  
