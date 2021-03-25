@@ -4,9 +4,11 @@ import './index.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
+import LoginElectionCommission from './LoginElectionCommission';
 import PublishResults from './PublishResults';
 import ViewResults from './ViewResults';
 import ForgotPassword from './ForgotPassword';
+import ForgotPasswordElectionCommission from './ForgotPasswordElectionCommission';
 import CandidateVote from './CandidateVote';
 import reportWebVitals from './reportWebVitals';
 
@@ -28,6 +30,12 @@ ReactDOM.render(
         </Route>
         <Route exact path='/CandidateVote'>
          <CandidateVote />
+        </Route>
+        <Route exact path='/LoginElectionCommission'>
+         <LoginElectionCommission />
+        </Route>
+        <Route exact path='/ForgotPasswordElectionCommission'>
+         <ForgotPasswordElectionCommission />
         </Route>
         <Route exact path='/PublishResults'>
          <PublishResults />

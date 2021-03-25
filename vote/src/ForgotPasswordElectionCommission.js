@@ -1,31 +1,31 @@
 import React from 'react';
 import {Link } from "react-router-dom";
-import './ForgotPassword.css';
+import './ForgotPasswordElectionCommission.css';
 import validator from 'validator';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 
-class ForgotPassword extends React.Component {
+class ForgotPasswordElectionCommission extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      voter_id: '',
+      election_commission_id: '',
       mail_id: '',
       password: '',
       confirm_password: '',
       passwordShown: false,
       confirm_passwordShown: false,
       authentication: 'Provide the Details...',
-      voter_id_status: '',
+      electionCommission_id_status: '',
       mail_id_status: '',
       password_status: '',
       confirm_password_status: ''
       
     };
 
-    this.handleChangeVoterID = this.handleChangeVoterID.bind(this);
+    this.handleChangeElectionCommissionID = this.handleChangeElectionCommissionID.bind(this);
     this.handleChangeMailID = this.handleChangeMailID.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this);
@@ -35,17 +35,17 @@ class ForgotPassword extends React.Component {
     this.cancelCourse = this.cancelCourse.bind(this);
   }
 
-  handleChangeVoterID = async(event) => {
-    await this.setState({voter_id: event.target.value});
-    if(this.state.voter_id.length!==10)
+  handleChangeElectionCommissionID = async(event) => {
+    await this.setState({election_commission_id: event.target.value});
+    if(this.state.election_commission_id.length!==10)
     {
-      this.setState({authentication : 'VoterID length is Invalid'});
-      this.setState({voter_id_status : ''});
+      this.setState({authentication : 'Officer ID length is Invalid'});
+      this.setState({electionCommission_id_status : ''});
     }
     else
     {
       this.setState({authentication : 'Provide the Details...'});
-      this.setState({voter_id_status: 'true'});
+      this.setState({electionCommission_id_status: 'true'});
     }
   }
   handleChangeMailID = async(event) => {
@@ -106,12 +106,12 @@ class ForgotPassword extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    if(this.state.voter_id_status && this.state.mail_id_status && this.state.password_status && this.state.confirm_password_status )
+    if(this.state.electionCommission_id_status && this.state.mail_id_status && this.state.password_status && this.state.confirm_password_status )
     {
-      fetch('/api/forgotPassword',{
+      fetch('/api/forgotPasswordElectionCommission',{
         method: "POST",
         body: JSON.stringify({
-          voter_id: this.state.voter_id,
+          election_commission_id: this.state.election_commission_id,
           mail_id: this.state.mail_id,
           password: this.state.password,
         }),
@@ -127,7 +127,7 @@ class ForgotPassword extends React.Component {
         .catch(err => {
           console.log(err);
         })
-        this.setState({voter_id: ''});
+        this.setState({election_commission_id: ''});
         this.setState({mail_id: ''});
         this.setState({password: ''});
         this.setState({confirm_password: ''});
@@ -148,9 +148,9 @@ class ForgotPassword extends React.Component {
         'Password Changed Successfully'
            
           }</h3>
-      <form id="login-form" onSubmit={this.handleSubmit}>
-        <label>Voter ID</label>
-          <input type="text" value={this.state.voter_id} onChange={this.handleChangeVoterID} required/>
+      <form onSubmit={this.handleSubmit}>
+        <label>Officer ID</label>
+          <input type="text" value={this.state.election_commission_id} onChange={this.handleChangeElectionCommissionID} required/>
         <br/><br/>
         <label>Mail ID</label>
           <input type="mail" value={this.state.mail_id} onChange={this.handleChangeMailID} required/>
@@ -170,7 +170,7 @@ class ForgotPassword extends React.Component {
         <br/><br/>
         <input type="reset" value="Reset" onClick={this.cancelCourse} />
         <br/><br/>
-        <Link to='/Login' className="btn">
+        <Link to='/LoginElectionCommission' className="btn">
         Back
         </Link>
         </center>
@@ -179,4 +179,4 @@ class ForgotPassword extends React.Component {
     );
   }
 }
-export default ForgotPassword;
+export default ForgotPasswordElectionCommission;

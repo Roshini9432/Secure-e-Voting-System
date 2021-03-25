@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import {Link } from "react-router-dom";
 import './PublishResults.css';
+
 
 function ResultDetails(props) {
 
     const [initialData,setInitialData]=useState([{}])
-
+   
     useEffect(()=> {
         fetch('/api/fetchResults').then (
         response=>response.json()
@@ -15,8 +15,10 @@ function ResultDetails(props) {
   
 
   return (
+    
     <div>
      {props.status ? 
+     
     <section>
             {initialData.map((result) => {
                 const partyId = result['party_id'];

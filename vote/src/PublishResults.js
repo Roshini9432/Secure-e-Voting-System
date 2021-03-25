@@ -1,9 +1,12 @@
-import React from 'react';
-import {Link } from "react-router-dom";
+import React, {useState } from 'react';
+import {Link, Redirect} from "react-router-dom";
+import ElectionCommissionSession from './ElectionCommissionSession';
 import './PublishResults.css';
 
 function PublishResults() {
-  const deadline = 'March 23 2021 20:42:00';
+  const [isResultPublished,setisResultPublished]=useState(false);
+  const [isSessionEnabled]=useState(Boolean(ElectionCommissionSession.getOfficer()));
+  const deadline = 'March 27 2021 09:00:00';
   const total = Date.parse(deadline) - Date.parse(new Date());
   function handlePublishResults()
   {
@@ -19,23 +22,49 @@ function PublishResults() {
           "Content-Type": "application/json; charset=UTF-8"
         }
       })
+      .then (
+        response=>response.json()
+    )
+      .then(json => {
+        const status = json.status;
+        if(status === 'YES')
+        {
+        setisResultPublished(true);
+        alert("Results Already  Published!");
+        }
+        else
+        {
+          alert("Results Published!");
+        }
+      })
        .catch(err => {
           console.log(err);
         })
-    alert("Results Published!");
     }
     else{
         alert("Unsucessful!");
     }
   }
 
+  function destroyElectionCommissionSession()
+  {
+    ElectionCommissionSession.setOfficer("");
+  }
+
   return (
+    <div>
+    {isSessionEnabled ? '' :  <Redirect to='/LoginElectionCommission'/>}
+    {isResultPublished ?
+    <Redirect to='/HomePage' />
+    :
     <div className="App-header">
-     <button className={(total<0) ? "btn" : "btn-disabled"} onClick={() => {handlePublishResults()}}>Publish Results</button>
+     <button disabled={(total<0) ? false : true} className="btn" onClick={() => {handlePublishResults()}}>Publish Results</button>
      <br/><br/>
-     <Link to='/HomePage' className="btn-back">
-         Back
+     <Link to='/LoginElectionCommission' className="btn-back" onClick={() => {destroyElectionCommissionSession()}}>
+         Logout
      </Link>
+    </div>
+    }
     </div>
   );
 }

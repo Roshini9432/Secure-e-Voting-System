@@ -8,7 +8,7 @@ function CandidateVote()
 {
 const [initialData,setInitialData]=useState([{}])
 const [isDisabled,setisDisabled]=useState(false)
-const [isSessionEnabled,setisSessionEnabled]=useState(Boolean(UserSession.getUser()))
+const [isSessionEnabled]=useState(Boolean(UserSession.getUser()))
 
 useEffect(()=> {
     fetch('/api/fetchParties').then (

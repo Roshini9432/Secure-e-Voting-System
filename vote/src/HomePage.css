@@ -48,7 +48,7 @@
   }
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
-      animation: App-logo-spin infinite 30s linear;
+      animation: App-logo-spin infinite 15s linear;
     }
   }
   
@@ -61,7 +61,7 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: black;
-    font-family: cursive;
+    font-family: arial;
   }
   
   h1{
@@ -71,10 +71,10 @@
  
   @keyframes App-logo-spin {
     from {
-      transform: rotate(0deg);
+      transform: rotateY(0deg);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotateY(360deg);
     }
   }
   

@@ -1,57 +1,55 @@
 import React from 'react';
 import {Link, Redirect} from "react-router-dom";
-import UserSession from './UserSession';
-import './Login.css';
+import ElectionCommissionSession from './ElectionCommissionSession';
+import './LoginElectionCommission.css';
 import validator from 'validator';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
-const startTime = 'March 26 2021 00:00:00';
-const deadline = 'March 26 2021 23:59:00';
+const deadline = 'March 27 2021 11:05:00';
 const total = Date.parse(deadline) - Date.parse(new Date());
-const start = Date.parse(startTime) - Date.parse(new Date());
-class Login extends React.Component {
+class LoginElectionCommission extends React.Component {
   static pin = '';
   constructor(props) {
     super(props);
     
     this.state = {
-      voter_id: '',
+      election_commission_id: '',
       mail_id: '',
       password: '',
       passwordShown: false,
-      authentication: 'Few Steps to Vote...',
-      voter_id_status: '',
+      authentication: 'Few Steps to Login...',
+      election_commission_id_status: '',
       mail_id_status: '',
       password_status: '',
       pin: '',
-      user_session_voter_id : '',
-      isEnabled : ((total>0 && start<0) ? true : false)
+      electionCommission_session_election_commission_id : '',
+      isEnabled : (total>0 ? true : false)
     };
     
 
-    this.handleChangeVoterID = this.handleChangeVoterID.bind(this);
+    this.handleChangeElectionCommissionID = this.handleChangeElectionCommissionID.bind(this);
     this.handleChangeMailID = this.handleChangeMailID.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.togglePasswordVisiblity = this.togglePasswordVisiblity.bind(this);
     this.cancelCourse = this.cancelCourse.bind(this);
-    this.createUserSession = this.createUserSession.bind(this);
+    this.createElectionCommissionSession = this.createElectionCommissionSession.bind(this);
   }
 
 
 
-  handleChangeVoterID = async(event) => {
-    await this.setState({voter_id: event.target.value});
-    if(this.state.voter_id.length!==10)
+  handleChangeElectionCommissionID = async(event) => {
+    await this.setState({election_commission_id: event.target.value});
+    if(this.state.election_commission_id.length!==10)
     {
-      await this.setState({authentication : 'VoterID length is Invalid'});
-      this.setState({voter_id_status : ''});
+      await this.setState({authentication : 'Officer ID length is Invalid'});
+      this.setState({electionCommision_id_status : ''});
     }
     else
     {
-      await this.setState({authentication : 'Few Steps to Vote...'});
-      this.setState({voter_id_status : 'true'});
+      await this.setState({authentication : 'Few Steps to Login...'});
+      this.setState({electionCommission_id_status : 'true'});
     }
   }
   handleChangeMailID = async(event) => {
@@ -63,7 +61,7 @@ class Login extends React.Component {
     }
     else
     {
-      await this.setState({authentication : 'Few Steps to Vote...'});
+      await this.setState({authentication : 'Few Steps to Login...'});
       this.setState({mail_id_status : 'true'});
     }
   }
@@ -81,7 +79,7 @@ class Login extends React.Component {
     }
     else
     {
-      await this.setState({authentication : 'Few Steps to Vote...'});
+      await this.setState({authentication : 'Few Steps to Login...'});
       this.setState({password_status : 'true'});
     }
   }
@@ -96,12 +94,12 @@ class Login extends React.Component {
   }
   handleSubmit = async(event) => {
     event.preventDefault();
-    if(this.state.voter_id_status && this.state.mail_id_status && this.state.password_status)
+    if(this.state.electionCommission_id_status && this.state.mail_id_status && this.state.password_status)
     {
-    fetch('/api/userCheck',{
+    fetch('/api/electionCommissionCheck',{
       method: "POST",
       body: JSON.stringify({
-        voter_id: this.state.voter_id,
+        election_commission_id: this.state.election_commission_id,
         mail_id: this.state.mail_id,
         password: this.state.password
       }),
@@ -125,10 +123,10 @@ class Login extends React.Component {
           {
             if(this.state.pin.length===6 )
             {
-              fetch('/api/verifyPin',{
+              fetch('/api/verifyPinElectionCommission',{
                 method: "POST",
                 body: JSON.stringify({
-                  voter_id: this.state.voter_id,
+                  election_commission_id: this.state.election_commission_id,
                   pin: this.state.pin
                 }),
                 headers: {
@@ -143,8 +141,8 @@ class Login extends React.Component {
               .catch(err => {
                   console.log(err);
                 })
-              this.setState({user_session_voter_id : this.state.voter_id});
-              this.setState({voter_id: ''});
+              this.setState({electionCommission_session_election_commission_id : this.state.election_commission_id});
+              this.setState({election_commission_id: ''});
               this.setState({mail_id: ''});
               this.setState({password: ''});
             }
@@ -166,8 +164,8 @@ class Login extends React.Component {
   }
 }
 
-  createUserSession(){
-    UserSession.setUser(this.state.user_session_voter_id);
+  createElectionCommissionSession(){
+    ElectionCommissionSession.setOfficer(this.state.electionCommission_session_election_commission_id);
   }
  
 
@@ -178,12 +176,12 @@ class Login extends React.Component {
         <h3>{this.state.authentication ?
         this.state.authentication
         :
-        <Link to='/CandidateVote' className="btn" onClick={this.createUserSession}>Go to DashBoard</Link>
+        <Link to='/PublishResults' className="btn" onClick={this.createElectionCommissionSession}>Go to DashBoard</Link>
            
           }</h3>
-      <form id="login-form" onSubmit={this.handleSubmit}>
-        <label>Voter ID</label>
-          <input type="text" value={this.state.voter_id} onChange={this.handleChangeVoterID} required/>
+      <form id="login-electionCommission-form" onSubmit={this.handleSubmit}>
+        <label>Officer ID</label>
+          <input type="text" value={this.state.election_commission_id} onChange={this.handleChangeElectionCommissionID} required/>
         <br/><br/>
         <label>Mail ID</label>
           <input type="mail" value={this.state.mail_id} onChange={this.handleChangeMailID} required/>
@@ -194,7 +192,7 @@ class Login extends React.Component {
         </div>
         <br/>
         <center>
-        <Link to='/ForgotPassword' className='makeLink'>Forgot Password?</Link>
+        <Link to='/ForgotPasswordelectionCommission' className='makeLink'>Forgot Password?</Link>
         <br/><br/>
         <input type="submit" value="Login" />
         <br/><br/>
@@ -213,4 +211,4 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+export default LoginElectionCommission;

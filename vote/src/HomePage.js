@@ -5,8 +5,10 @@ import vote from './vote.png';
 import './HomePage.css';
 
 function HomePage() {
-  const deadline = 'March 25 2021 20:42:00';
+  const startTime = 'March 26 2021 00:00:00';
+  const deadline = 'March 26 2021 23:59:00';
   const total = Date.parse(deadline) - Date.parse(new Date());
+  const start = Date.parse(startTime) - Date.parse(new Date());
 
   return (
     <div className="App-header">
@@ -14,11 +16,11 @@ function HomePage() {
         <img src={logo} className="App-logo" alt="logo" />
         <br/>
         
-        <Link to='/PublishResults' className="btn">
+        <Link to='/LoginElectionCommission' className="btn">
           Election Commission
         </Link>
         <br/>
-        <Link to='/Login' className={(total>0) ? "btn" : "btn-disabled"}>
+        <Link to='/Login' className={(total>0 && start<0) ? "btn" : "btn-disabled"}>
           Voting Canditate
         </Link>
         <br/>
