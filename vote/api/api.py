@@ -247,7 +247,7 @@ def generateOTP() :
     return otp
 
 def sendMail(mail,pin):
-    otpstr = "Your OTP for Secure Voting is ' "+ pin +" '.\nPlease do not Share this Code with Others."
+    otpstr = "Your OTP for Secure Voting is ' "+ pin +" '.\nPlease do not Share this Code with Others.\nValid only for 3 minutes."
     
     msg = EmailMessage()
     msg.set_content(otpstr)

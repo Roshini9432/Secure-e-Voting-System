@@ -58,6 +58,7 @@ function PublishResults() {
     <Redirect to='/HomePage' />
     :
     <div className="App-header">
+     <p className="OfficerName">Logged in as <hr/>{ElectionCommissionSession.getOfficer()}</p>
      <button disabled={(total<0) ? false : true} className="btn" onClick={() => {handlePublishResults()}}>Publish Results</button>
      <br/><br/>
      <Link to='/LoginElectionCommission' className="btn-back" onClick={() => {destroyElectionCommissionSession()}}>

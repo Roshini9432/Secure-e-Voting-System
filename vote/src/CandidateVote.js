@@ -65,10 +65,13 @@ function destroyUserSession()
 return(
 
 <div className="App-header">
+<p className='UserName'>Logged in as <hr/>{UserSession.getUser()}</p>
 <h3>Parties List
 <p>{isDisabled ? 'Successfully Voted' : 'Yet to Vote...'}</p>
 <p>{isSessionEnabled ? '' :  <Redirect to='/Login'/>}</p>
 </h3>
+
+
 <section>
                         {initialData.map((party) => {
                             const partyId = party['party_id'];

@@ -6,7 +6,7 @@ import validator from 'validator';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
-const deadline = 'March 27 2021 11:05:00';
+const deadline = 'March 28 2021 11:05:00';
 const total = Date.parse(deadline) - Date.parse(new Date());
 class LoginElectionCommission extends React.Component {
   static pin = '';
@@ -24,7 +24,7 @@ class LoginElectionCommission extends React.Component {
       password_status: '',
       pin: '',
       electionCommission_session_election_commission_id : '',
-      isEnabled : (total>0 ? true : false)
+      isEnabled : (total<0 ? true : false)
     };
     
 
@@ -151,16 +151,20 @@ class LoginElectionCommission extends React.Component {
                 this.setState({authentication : 'Login Unsuccessful...'})
             }
           }
+          else {
+            this.setState({authentication : 'Login Unsuccessful...'})
+        }
 
         }
-        else
-        {
-          this.setState({authentication : 'Invalid Credentials'});
-        }
+        
       }.bind(this)
     ,
     10000
     )
+  }
+  else
+  {
+    this.setState({authentication : 'Invalid Credentials'});
   }
 }
 

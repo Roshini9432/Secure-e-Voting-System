@@ -6,8 +6,8 @@ import validator from 'validator';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
-const startTime = 'March 26 2021 00:00:00';
-const deadline = 'March 26 2021 23:59:00';
+const startTime = 'March 28 2021 00:00:00';
+const deadline = 'March 28 2021 23:59:00';
 const total = Date.parse(deadline) - Date.parse(new Date());
 const start = Date.parse(startTime) - Date.parse(new Date());
 class Login extends React.Component {
@@ -153,16 +153,19 @@ class Login extends React.Component {
                 this.setState({authentication : 'Login Unsuccessful...'})
             }
           }
-
+          else {
+            this.setState({authentication : 'Login Unsuccessful...'})
         }
-        else
-        {
-          this.setState({authentication : 'Invalid Credentials'});
+
         }
       }.bind(this)
     ,
     10000
     )
+  }
+  else
+  {
+    this.setState({authentication : 'Invalid Credentials'});
   }
 }
 
